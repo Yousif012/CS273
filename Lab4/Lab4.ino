@@ -41,17 +41,18 @@ void decodeMorse(const String & string, char message[])
   // string contains the input binary string separated by single spaces
   // message contains the decoded English characters and numbers    
   // You will call the assembly function decode_morse()
-  /*
   String temp = "";
   for(int i=0; i<string.length(); i++){
+    val = 0;
+    width = 0;
     if(string[i] == ' ' || string[i] == '\0'){
       decode_morse();
       temp = "";
     }
+    val = Int
     temp += string[i];
     
   }
-  */
 }
 
 void decodeMorse() 
@@ -83,9 +84,9 @@ void setup() {
   //
   Serial.begin(9600);
 
-  flashEureka();
+  //flashEureka();
 
-  //decodeMorse();
+  decodeMorse();
   
 }
 

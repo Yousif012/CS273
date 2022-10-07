@@ -41,6 +41,8 @@
   pop r16
 .endm ; of popall
 
+.equ DDRB, 0x04
+.equ PORTB, 0x05
 ;.  ..-  .-.  .  -.-  .-
 
 eureka:
@@ -48,70 +50,133 @@ eureka:
   ldi r26, 0b0110001
   ldi r27, 0b0000000
   
-  ldi  R22, 0xb0
-  ldi  R23, 0x00
-  ldi  R24, 0x00
-  ldi  R25, 0x00
+  ldi r18, 0b00100000
+  out DDRB, r18
+
+  out PORTB, r26
+  call dShort
+  out PORTB, r27
   
+  call dSpace
+  
+  out PORTB, r26
   call dShort
+  out PORTB, r27
+  
+  call dBetween
+  
+  out PORTB, r26
+  call dShort
+  out PORTB, r27
+
+  call dBetween
+  
+  out PORTB, r26
+  call dLong
+  out PORTB, r27
 
   call dSpace
 
-  call dLong
-  call dLong
+  out PORTB, r26
   call dShort
+  out PORTB, r27
+
+  call dBetween
+
+  out PORTB, r26
+  call dLong
+  out PORTB, r27
+
+  call dBetween
+  
+  out PORTB, r26
+  call dShort
+  out PORTB, r27
 
   call dSpace
 
+  out PORTB, r26
   call dShort
-  call dLong
-  call dShort
+  out PORTB, r27
 
   call dSpace
 
+  out PORTB, r26
+  call dLong
+  out PORTB, r27
+
+  call dBetween
+  
+  out PORTB, r26
   call dShort
+  out PORTB, r27
+
+  call dBetween
+  
+  out PORTB, r26
+  call dLong
+  out PORTB, r27
 
   call dSpace
-
-  call dLong
+  
+  out PORTB, r26
   call dShort
-  call dLong
+  out PORTB, r27
 
-  call dSpace
-
-  call dShort
+  call dBetween
+  
+  out PORTB, r26
   call dLong
- 
+  out PORTB, r27
+
+
+  ; delay for next iteration
+  pushall
+  ldi  r22, 0x00
+  ldi  r23, 0x0F
+  ldi  r24, 0x00
+  ldi  r25, 0x00
+  call delay
+  popall
+  
 
 dShort:
-  out 0x05, r26
   pushall
-  ldi  R22, 0xb0
-  ldi  R23, 0x00
-  ldi  R24, 0x00
-  ldi  R25, 0x00
+  ldi  r22, 0xf4
+  ldi  r23, 0x01
+  ldi  r24, 0x00
+  ldi  r25, 0x00
   call delay
   popall
-  out 0x05, r27
-
+  ret
+  
 dLong:
-  out 0x05, r26
   pushall
-  ldi  R22, 0x00
-  ldi  R23, 0x10
+  ldi  R22, 0xdc
+  ldi  R23, 0x05
   ldi  R24, 0x00
   ldi  R25, 0x00
   call delay
   popall
-  out 0x05, r27
+  ret
 
 dSpace:
   pushall
-  ldi  R22, 0xb0
-  ldi  R23, 0x03
+  ldi  R22, 0xdc
+  ldi  R23, 0x05
   ldi  R24, 0x00
   ldi  R25, 0x00
   call delay
   popall
+  ret
 
+dBetween:
+  pushall
+  ldi  R22, 0xFA
+  ldi  R23, 0x00
+  ldi  R24, 0x00
+  ldi  R25, 0x00
+  call delay
+  popall
+  ret
 ret
