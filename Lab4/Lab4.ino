@@ -45,11 +45,22 @@ void decodeMorse(const String & string, char message[])
   for(int i=0; i<string.length(); i++){
     val = 0;
     width = 0;
-    if(string[i] == ' ' || string[i] == '\0'){
+    if(string[i] == ' ' || i == string.length() - 1){
+      width = temp.length();
+      Serial.print("Width: ");
+      Serial.println(width);
+      for(int j=0; j<temp.length(); j++){
+        if(temp[j] == '1'){
+          for(int k=0; k < pow(2, temp.length() - 1 - j); k++)
+            val++;
+        }
+      }
+      Serial.print("Value: ");
+      Serial.println(val);
       decode_morse();
       temp = "";
+      continue;
     }
-    val = Int
     temp += string[i];
     
   }
@@ -65,7 +76,6 @@ void decodeMorse()
   Serial.print("The Morse code string is: ");
   Serial.println(string);
 
-  string = "1000 100 0"; // "01 1000";
   char message[100];
 
   decodeMorse(string, message);
