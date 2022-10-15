@@ -77,9 +77,8 @@ decode_morse:
     LDI R26, lo8(morse_width) ; initialize low byte of X
 
     # ENTER YOUR CODE BELOW
-    ldi r18, 0b00100000
-    ldi r25, 0b0100000
-    out DDRB, r18
+
+    ldi r22, 27
     
     lds R23, val
     lds R24, width
@@ -88,15 +87,23 @@ loop1:
     LD r19, Z+ ; value
     LD r20, X+ ; width
     LD r21, Y+ ; ascii
+
+    dec r22
+    breq stopLoop
     
     cp r23, r19
     brne loop1
     cp r24, r20
     brne loop1
-    jmp save
-
- save:
-  out PORTB, r25
+    rcall save
   
     popall
     RET
+  
+ save:
+  sts ascii, r21
+  ret
+  
+ stopLoop:
+  ldi r25, 0
+  sts ascii, r25
