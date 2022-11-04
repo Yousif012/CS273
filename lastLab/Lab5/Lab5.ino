@@ -64,8 +64,8 @@ void C_setup_ports(){
 }
 
 void loop() {
-  do_c_version();
-  //do_avr_version();   
+  //do_c_version();
+  do_avr_version();   
 }
 
 void do_avr_version() {
@@ -94,8 +94,31 @@ void do_avr_version() {
   show_number();
   delay(1000);
 
-  // missing  ....
- 
+  digit=1;
+  number=5;
+  show_number();
+  delay(1000);
+
+  digit=2;
+  number=6;
+  show_number();
+  delay(1000);
+
+  digit=3;
+  number=7;
+  show_number();
+  delay(1000);
+
+  digit=0;
+  number=8;
+  show_number();
+  delay(1000);
+
+  digit=1;
+  number=9;
+  show_number();
+  delay(1000);
+
 } // do_avr_version
 
 
@@ -141,10 +164,8 @@ void do_c_version(){
   delay(1000);               // wait for a second
 
   //number 3 on digit 3
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
-  digitalWrite(D3, HIGH);
-  digitalWrite(D4, LOW); 
+  digit = 3;
+  select_digit(); 
   
   digitalWrite(pinA, HIGH);   
   digitalWrite(pinB, HIGH);   
@@ -156,10 +177,8 @@ void do_c_version(){
   delay(1000);               // wait for a second
   
   //number 4 on digit 0
-  digitalWrite(D1, LOW);
-  digitalWrite(D2, HIGH);
-  digitalWrite(D3, HIGH);
-  digitalWrite(D4, HIGH); 
+  digit = 4;
+  select_digit(); 
   
   digitalWrite(pinA, LOW);   
   digitalWrite(pinB, HIGH);   
@@ -171,10 +190,8 @@ void do_c_version(){
   delay(1000);               // wait for a second
   
   //number 5 on digit 1
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, LOW);
-  digitalWrite(D3, HIGH);
-  digitalWrite(D4, HIGH); 
+  digit = 5;
+  select_digit(); 
   
   digitalWrite(pinA, HIGH);   
   digitalWrite(pinB, LOW);   
@@ -186,10 +203,8 @@ void do_c_version(){
   delay(1000);               // wait for a second
   
   //number 6 on digit 2
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
-  digitalWrite(D3, LOW);
-  digitalWrite(D4, HIGH); 
+  digit = 6;
+  select_digit(); 
   
   digitalWrite(pinA, HIGH);   
   digitalWrite(pinB, LOW);   
@@ -201,10 +216,8 @@ void do_c_version(){
   delay(1000);               // wait for a second
   
   //number 7 on digit 3
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, HIGH);
-  digitalWrite(D3, HIGH);
-  digitalWrite(D4, LOW); 
+  digit = 7;
+  select_digit(); 
   
   digitalWrite(pinA, HIGH);   
   digitalWrite(pinB, HIGH);   
@@ -216,10 +229,8 @@ void do_c_version(){
   delay(1000);               // wait for a second
   
   //number 8 on digit 0
-  digitalWrite(D1, LOW);
-  digitalWrite(D2, HIGH);
-  digitalWrite(D3, HIGH);
-  digitalWrite(D4, HIGH); 
+  digit = 8;
+  select_digit(); 
   
   digitalWrite(pinA, HIGH);   
   digitalWrite(pinB, HIGH);   
@@ -231,10 +242,8 @@ void do_c_version(){
   delay(1000);               // wait for a second
 
   //number 9 on digit 1
-  digitalWrite(D1, HIGH);
-  digitalWrite(D2, LOW);
-  digitalWrite(D3, HIGH);
-  digitalWrite(D4, HIGH); 
+  digit = 9;
+  select_digit(); 
   
   digitalWrite(pinA, HIGH);   
   digitalWrite(pinB, HIGH);   

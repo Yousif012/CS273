@@ -119,32 +119,62 @@ select_digit: ;; routine to select the correct digit among the four segments
 
   ldi R31, hi8(digit_table)
   ldi R30, lo8(digit_table)
-
+  ldi R29, hi8(portb_table)
+  ldi R28, lo8(portb_table)
+  
   lds R16, digit
-  ldi R17, 0
+  lds R19, number
+  ldi R17, -1
 
   loop:
-      ld R18, Z
-      ldi r19, 0xFF
-      and r19, r17
-      inc r17
-      cp R16, R19
-      brne loop
-      rcall found
-      popall
+    inc R17
+    ld R18, Z+
+    cp r16, r17
+    brne loop
 
-  found:
-    out PORTB, R18
-    ret
+  ldi R17, -1
+  loop3:
+    inc R17
+    ld R20, Y+
+    cp R19, R17
+    brne loop3
+  
+  or R18, R20
+
+
+
+  out PORTB, r18
+
+  popall
+
 
   ret ;; of select_digit
 
 
 show_number:  ;;  main entry point for setting a segment in the 4x7 segment
 
+  pushall
+
   ;; call select_digit to choose the correct "digit" on the segment  
+  rcall select_digit
    
   ;; use "number" to find the values that need to be sent to 
   ;; PORTB and PORTD.
+  ldi R27, hi8(portd_table)
+  ldi R26, lo8(portd_table)
+
+  lds r16, number
+  ldi R17, -1
+
+  loop2:
+    inc R17
+    ld R19, X+
+    cp r16, r17
+    brne loop2
+
+  out PORTD, R19
+
+  popall
+  
 
   ret ;; of show_number
